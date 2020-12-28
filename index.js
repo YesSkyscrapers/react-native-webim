@@ -12,7 +12,7 @@ const EVENTS = {
 }
 
 const onEvent = (event, callback) => {
-    eventEmitter.addListener(event, callback)
+    eventEmitter.addListener(event, callback);
     return () => eventEmitter.removeListener(event, callback)
 }
 
