@@ -12,15 +12,26 @@ class Utils : NSObject  {
     static func messageToJson(message: Message) -> [String:Any]{
 
         var map = [String:Any]()
-        map.updateValue(message.getID(), forKey: "id");
-        map.updateValue(message.getTime(), forKey: "time");
-        map.updateValue(message.getType(), forKey: "type");
-        map.updateValue(message.getText(), forKey: "text");
-        map.updateValue(message.getSenderName(), forKey: "name");
-        map.updateValue(message.getSendStatus(), forKey: "status");
-        map.updateValue(message.getSenderAvatarFullURL(), forKey: "avatar");
-        map.updateValue(message.isReadByOperator(), forKey: "read");
-        map.updateValue(message.canBeEdited(), forKey: "canEdit");
+        
+        let id : String = message.getID();
+        let time : String = message.getTime().datatypeValue;
+        let type : String = String(describing: message.getType());
+        let text : String = message.getText();
+        let name : String = message.getSenderName();
+        let status : String = String(describing: message.getSendStatus());
+        let avatar : String = message.getSenderAvatarFullURL()?.absoluteString ?? "";
+        let read : Bool = message.isReadByOperator();
+        let canEdit : Bool = message.canBeEdited();
+        
+        map.updateValue(id, forKey: "id");
+        map.updateValue(time, forKey: "time");
+        map.updateValue(type, forKey: "type");
+        map.updateValue(text, forKey: "text");
+        map.updateValue(name, forKey: "name");
+        map.updateValue(status, forKey: "status");
+        map.updateValue(avatar, forKey: "avatar");
+        map.updateValue(read, forKey: "read");
+        map.updateValue(canEdit, forKey: "canEdit");
         
         return map;
     }
