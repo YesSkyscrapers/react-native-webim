@@ -38,7 +38,7 @@ public class Utils {
 
     public static WritableMap messageToJson(Message msg) {
         final WritableMap map = Arguments.createMap();
-        map.putString("id", msg.getId().toString());
+        map.putString("id", msg.getClientSideId().toString());
         map.putDouble("time", msg.getTime());
         map.putString("type", msg.getType().toString());
         map.putString("text", msg.getText());
