@@ -22,6 +22,19 @@ class Utils : NSObject  {
         let avatar : String = message.getSenderAvatarFullURL()?.absoluteString ?? "";
         let read : Bool = message.isReadByOperator();
         let canEdit : Bool = message.canBeEdited();
+        let keyboard : [[KeyboardButton]]? = message.getKeyboard()?.getButtons();
+        var buttons = [String]();
+
+        if keyboard != nil {
+            for key in keyboard! {
+                for button in key {
+                    let buttonText = button.getText();
+                    buttons.append(buttonText)
+                }
+            }
+        } else {
+            print ("KEYBOARD BUTTON NIL")
+        }
         
         map.updateValue(id, forKey: "id");
         map.updateValue(time, forKey: "time");
@@ -32,6 +45,7 @@ class Utils : NSObject  {
         map.updateValue(avatar, forKey: "avatar");
         map.updateValue(read, forKey: "read");
         map.updateValue(canEdit, forKey: "canEdit");
+        map.updateValue(buttons, forKey: "buttons");
         
         return map;
     }
