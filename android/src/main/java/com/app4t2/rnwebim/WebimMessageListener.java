@@ -16,12 +16,12 @@ import com.facebook.react.bridge.WritableArray;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.webimapp.android.sdk.Webim;
-import com.webimapp.android.sdk.WebimSession;
-import com.webimapp.android.sdk.MessageListener;
-import com.webimapp.android.sdk.Message;
-import com.webimapp.android.sdk.MessageTracker;
-import com.webimapp.android.sdk.WebimLog;
+import ru.webim.android.sdk.Webim;
+import ru.webim.android.sdk.WebimSession;
+import ru.webim.android.sdk.MessageListener;
+import ru.webim.android.sdk.Message;
+import ru.webim.android.sdk.MessageTracker;
+import ru.webim.android.sdk.WebimLog;
 
 public class WebimMessageListener implements MessageListener {
     private static final int MESSAGES_PER_REQUEST = 25;
