@@ -1,6 +1,7 @@
 package com.app4t2.rnwebim;
 
 import java.util.List;
+import java.util.ArrayList;
 import android.util.Log;
 
 import com.facebook.react.bridge.ReactApplicationContext;
