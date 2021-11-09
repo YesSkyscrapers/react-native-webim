@@ -1,6 +1,7 @@
 package com.app4t2.rnwebim;
 
 import java.util.List;
+import java.util.ArrayList;
 import android.util.Log;
 
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -16,12 +17,12 @@ import com.facebook.react.bridge.WritableArray;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.webimapp.android.sdk.Webim;
-import com.webimapp.android.sdk.WebimSession;
-import com.webimapp.android.sdk.MessageListener;
-import com.webimapp.android.sdk.Message;
-import com.webimapp.android.sdk.MessageTracker;
-import com.webimapp.android.sdk.WebimLog;
+import ru.webim.android.sdk.Webim;
+import ru.webim.android.sdk.WebimSession;
+import ru.webim.android.sdk.MessageListener;
+import ru.webim.android.sdk.Message;
+import ru.webim.android.sdk.MessageTracker;
+import ru.webim.android.sdk.WebimLog;
 
 
 public class Utils {
@@ -47,6 +48,25 @@ public class Utils {
         map.putString("avatar", msg.getSenderAvatarUrl());
         map.putBoolean("read", msg.isReadByOperator());
         map.putBoolean("canEdit", msg.canBeEdited());
+
+        List<String> buttons = new ArrayList<String>();
+        Message.Keyboard keyboard = msg.getKeyboard();
+        if (keyboard != null) {
+            List<List<Message.KeyboardButtons>> keyboardButtons = keyboard.getButtons();
+            for (List<Message.KeyboardButtons> buttonsArray : keyboardButtons) {
+                    for (Message.KeyboardButtons button : buttonsArray) {
+                        String buttonTitle = button.getText();
+                        buttons.add(buttonTitle);
+                    }
+            }
+        }
+        String[] titles = buttons.toArray(new String[buttons.size()]);
+        WritableArray promiseArray = Arguments.createArray();
+        for(int i=0; i < titles.length; i++){
+            promiseArray.pushString(titles[i]);
+        }
+        map.putArray("buttons", promiseArray);
+
         return map;
     }
 
