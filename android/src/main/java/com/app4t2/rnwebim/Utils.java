@@ -47,6 +47,25 @@ public class Utils {
         map.putString("avatar", msg.getSenderAvatarUrl());
         map.putBoolean("read", msg.isReadByOperator());
         map.putBoolean("canEdit", msg.canBeEdited());
+
+        List<String> buttons = new ArrayList<String>();
+        Message.Keyboard keyboard = msg.getKeyboard();
+        if (keyboard != null) {
+            List<List<Message.KeyboardButtons>> keyboardButtons = keyboard.getButtons();
+            for (List<Message.KeyboardButtons> buttonsArray : keyboardButtons) {
+                    for (Message.KeyboardButtons button : buttonsArray) {
+                        String buttonTitle = button.getText();
+                        buttons.add(buttonTitle);
+                    }
+            }
+        }
+        String[] titles = buttons.toArray(new String[buttons.size()]);
+        WritableArray promiseArray = Arguments.createArray();
+        for(int i=0; i < titles.length; i++){
+            promiseArray.pushString(titles[i]);
+        }
+        map.putArray("buttons", promiseArray);
+
         return map;
     }
 
